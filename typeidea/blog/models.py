@@ -23,6 +23,9 @@ class Post(models.Model):
 
     created_time = models.DateTimeField(auto_now_add=True, verbose_name="创建时间")
 
+    def __str__(self):
+        return self.title
+
     def __unicode__(self):
         return self.title
 
@@ -43,6 +46,9 @@ class Category(models.Model):
     owner = models.ForeignKey(User, verbose_name="作者")
     created_time = models.DateTimeField(auto_now_add=True, verbose_name="创建时间")
 
+    def __str__(self):
+        return self.name
+
     def __unicode__(self):
         return self.name
 
@@ -61,6 +67,9 @@ class Tag(models.Model):
 
     owner = models.ForeignKey(User, verbose_name="作者")
     created_time = models.DateTimeField(auto_now_add=True, verbose_name="创建时间")
+
+    def __str__(self):
+        return self.name
 
     def __unicode__(self):
         return self.name
