@@ -16,7 +16,7 @@ class PostAdmin(admin.ModelAdmin):
 
     list_display = ['title', 'category', 'content', 'status_show',
                     'owner', 'created_time', 'operator']
-    list_display_links = []
+    list_display_links = None
     list_filter = ['category', 'owner']
     search_fields = ['title', 'category__name', 'owner__username']
     show_full_result_count = False
@@ -72,7 +72,7 @@ class PostInline(admin.TabularInline):
 @admin.register(Tag, site=custom_site)
 class TagAdmin(admin.ModelAdmin):
     list_display = ['name', 'status', 'owner', 'created_time', 'operator']
-    list_display_links = []
+    list_display_links = None
     list_filter = ['owner']
     search_fields = ['name', 'owner__username']
 
@@ -100,7 +100,7 @@ class CategoryAdmin(admin.ModelAdmin):
     ]
 
     list_display = ['name', 'status', 'nav_show', 'owner', 'created_time', 'operator']
-    list_display_links = []
+    list_display_links = None
     list_filter = ['owner', 'status']
     search_fields = ['name', 'status', 'owner_username']
 

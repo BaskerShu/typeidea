@@ -15,7 +15,7 @@ class Comment(models.Model):
     created_time = models.DateTimeField(auto_now_add=True, verbose_name="创建时间")
 
     def __unicode__(self):
-        return self.post
+        return self.content
 
     class Meta:
         verbose_name = verbose_name_plural = "评论"
