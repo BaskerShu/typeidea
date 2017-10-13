@@ -50,6 +50,10 @@ class Category(models.Model):
     owner = models.ForeignKey(User, verbose_name="作者")
     created_time = models.DateTimeField(auto_now_add=True, verbose_name="创建时间")
 
+    def nav_show(self):
+        return '是' if self.is_nav else '否'
+    nav_show.short_description = '是否为导航'
+
     def __str__(self):
         return self.name
 

@@ -16,7 +16,7 @@ class PostAdmin(admin.ModelAdmin):
 
     list_display = ['title', 'category', 'content', 'status_show',
                     'owner', 'created_time', 'operator']
-    list_display_links = []
+    list_display_links = None
     list_filter = ['category', 'owner']
     search_fields = ['title', 'category__name', 'owner__username']
     show_full_result_count = False
@@ -52,13 +52,11 @@ class PostAdmin(admin.ModelAdmin):
         super(PostAdmin, self).save_model(request, obj, form, change)
 
 
-class PostInline(admin.StackedInline):
+class PostInline(admin.TabularInline):
     fieldsets = (
         ('基础设置', {
             'fields': (
-                ('title', 'category'),
-                'desc',
-                'status',
+                ('title', 'status'),
                 'content',
             )
         }),
@@ -73,7 +71,26 @@ class PostInline(admin.StackedInline):
 
 @admin.register(Tag, site=custom_site)
 class TagAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['name', 'status', 'owner', 'created_time', 'operator']
+    list_display_links = None
+    list_filter = ['owner']
+    search_fields = ['name', 'owner__username']
+
+    # 编辑界面
+    fields = (
+        ('name', 'status'),
+    )
+
+    def operator(self, obj):
+        return format_html(
+            '<a href={}>编辑</a>',
+            reverse('cus_admin:blog_tag_change', args=(obj.id,))
+        )
+    operator.short_description = '操作'
+
+    def save_model(self, request, obj, form, change):
+        obj.owner = request.user
+        super(TagAdmin, self).save_model(request, obj, form, change)
 
 
 @admin.register(Category, site=custom_site)
@@ -81,3 +98,22 @@ class CategoryAdmin(admin.ModelAdmin):
     inlines = [
         PostInline,
     ]
+
+    list_display = ['name', 'status', 'nav_show', 'owner', 'created_time', 'operator']
+    list_display_links = None
+    list_filter = ['owner', 'status']
+    search_fields = ['name', 'status', 'owner_username']
+
+    # 编辑界面
+    fields = (('name', 'status', 'is_nav'), )
+
+    def operator(self, obj):
+        return format_html(
+            '<a href={}>编辑</a>',
+            reverse('cus_admin:blog_category_change', args=(obj.id,))
+        )
+    operator.short_description = '操作'
+
+    def save_model(self, request, obj, form, change):
+        obj.owner = request.user
+        super(CategoryAdmin, self).save_model(request, obj, form, change)
