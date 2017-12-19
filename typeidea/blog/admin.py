@@ -8,34 +8,28 @@ from django.utils.html import format_html
 from .adminforms import PostAdminForm
 from .models import Post, Tag, Category
 from typeidea.custom_site import custom_site
+from typeidea.custom_admin import BaseOwnerAdmin
 
 
 @admin.register(Post, site=custom_site)
-class PostAdmin(admin.ModelAdmin):
+class PostAdmin(BaseOwnerAdmin):
     form = PostAdminForm
 
-    list_display = ['title', 'category', 'content', 'status_show',
+    list_display = ['title', 'category', 'content', 'status',
                     'owner', 'created_time', 'operator']
     list_display_links = None
     list_filter = ['category', 'owner']
-    search_fields = ['title', 'category__name', 'owner__username']
+    search_fields = ['title', 'category__name']
     show_full_result_count = False
 
     # 编辑界面
     save_on_top = False
-    fieldsets = (
-        ('基础设置', {
-            'fields': (
-                ('title', 'category'),
-                'desc',
-                'status',
-                'content',
-            )
-        }),
-        ('高级配置', {
-            'fields': ('tag',),
-            'classes': ('collapse', 'addon'),
-        })
+    fields = (
+        ('title', 'category'),
+        'desc',
+        'status',
+        'content',
+        'tag'
     )
     filter_horizontal = ['tag']  # 多对多字段管理
 
@@ -46,31 +40,9 @@ class PostAdmin(admin.ModelAdmin):
         )
     operator.short_description = '操作'
 
-    def save_model(self, request, obj, form, change):
-        # import pdb;pdb.set_trace()
-        obj.owner = request.user
-        super(PostAdmin, self).save_model(request, obj, form, change)
-
-
-class PostInline(admin.TabularInline):
-    fieldsets = (
-        ('基础设置', {
-            'fields': (
-                ('title', 'status'),
-                'content',
-            )
-        }),
-        ('高级配置', {
-            'fields': ('tag',),
-            'classes': ('collapse', 'addon'),
-        })
-    )
-    extra = 1
-    model = Post
-
 
 @admin.register(Tag, site=custom_site)
-class TagAdmin(admin.ModelAdmin):
+class TagAdmin(BaseOwnerAdmin):
     list_display = ['name', 'status', 'owner', 'created_time', 'operator']
     list_display_links = None
     list_filter = ['owner']
@@ -88,17 +60,9 @@ class TagAdmin(admin.ModelAdmin):
         )
     operator.short_description = '操作'
 
-    def save_model(self, request, obj, form, change):
-        obj.owner = request.user
-        super(TagAdmin, self).save_model(request, obj, form, change)
-
 
 @admin.register(Category, site=custom_site)
-class CategoryAdmin(admin.ModelAdmin):
-    inlines = [
-        PostInline,
-    ]
-
+class CategoryAdmin(BaseOwnerAdmin):
     list_display = ['name', 'status', 'nav_show', 'owner', 'created_time', 'operator']
     list_display_links = None
     list_filter = ['owner', 'status']
@@ -113,7 +77,3 @@ class CategoryAdmin(admin.ModelAdmin):
             reverse('cus_admin:blog_category_change', args=(obj.id,))
         )
     operator.short_description = '操作'
-
-    def save_model(self, request, obj, form, change):
-        obj.owner = request.user
-        super(CategoryAdmin, self).save_model(request, obj, form, change)
