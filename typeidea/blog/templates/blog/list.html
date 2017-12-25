@@ -1,12 +1,58 @@
-<h1>post list</h1>
 <ul>
-    {% for post in posts%}
-    <li>
-        <a href="{% url 'detail' post.id %}">title: {{ post.title }}</a><br/>
-	des :{{ post.des }}
-    </li>
+    {% for cate in nav_cates %}
+        <li><a href="{% url 'category' cate.id %}">{{ cate.name }}</a></li>
     {% endfor %}
 </ul>
+
+<hr>
+
+<h1>post list</h1>
+<ul>
+    {% if posts %}
+        {% for post in posts%}
+            <li>
+                <a href="{% url 'detail' post.id %}">标题: {{ post.title }}</a><br/>
+                摘要 :{{ post.desc }}
+            </li>
+        {% endfor %}
+    {% else %}
+        此分类下没有任何文章
+    {% endif %}
+</ul>
+
 {% if posts.has_previous %}<a href="?page={{ posts.previous_page_number }}">上一页</a>{% endif %}
 <span>{{ posts.number }} \ {{ posts.paginator.num_pages }}</span>
 {% if posts.has_next %}<a href="?page={{ posts.next_page_number }}">下一页</a>{% endif %}
+
+<hr>
+
+<ul>
+    {% for cate in cates %}
+        <li><a href="{% url 'category' cate.id %}">{{ cate.name }}</a></li>
+    {% endfor %}
+</ul>
+
+<hr>
+
+<h1>侧边栏</h1>
+<ul>
+    {% for side_bar in side_bars %}
+        <h2>{{ side_bar.title }}</h2>
+        {% if side_bar.display_type == 1 %}
+            <div>
+                <!-- safe标签不进行django的自动转移，等价于autoescape off -->
+                {{ side_bar.content|safe }}
+            </div>
+        {% endif %}
+        {% if side_bar.display_type == 2 %}
+            {% for post in recently_post %}
+                <li><a href="{% url 'detail' post.id %}">{{ post.title }}</a></li>
+            {% endfor %}
+        {% endif %}
+        {% if side_bar.display_type == 4 %}
+            {% for comment in recently_comment %}
+                <li><p>{{comment.content }}</p></li>
+            {% endfor %}
+        {% endif %}
+    {% endfor %}
+</ul>
