@@ -10,6 +10,33 @@ from config.models import SideBar
 from comment.models import Comment
 
 
+def get_common_context():
+    # 分类导航
+    nav_cates = []
+    cates = []
+    categories = Category.objects.filter(status=1)
+    for cate in categories:
+        if cate.is_nav:
+            nav_cates.append(cate)
+        else:
+            cates.append(cate)
+
+    # 侧边栏
+    side_bars = SideBar.objects.filter(status=1)
+    recently_post = Post.objects.filter(status=1)[:10]
+    recently_comment = Comment.objects.filter(status=1)[:10]
+
+    context = {
+        'nav_cates': nav_cates,
+        'cates': cates,
+        'side_bars': side_bars,
+        'recently_post': recently_post,
+        'recently_comment': recently_comment,
+    }
+
+    return context
+
+
 def post_list(request, category_id=None, tag_id=None):
     page_size = 2
     page = request.GET.get('page', 1)
@@ -38,29 +65,12 @@ def post_list(request, category_id=None, tag_id=None):
     except EmptyPage:
         posts = paginator.page(paginator.num_pages)
 
-    # 分类导航
-    nav_cates = []
-    cates = []
-    categories = Category.objects.filter(status=1)
-    for cate in categories:
-        if cate.is_nav:
-            nav_cates.append(cate)
-        else:
-            cates.append(cate)
-
-    # 侧边栏
-    side_bars = SideBar.objects.filter(status=1)
-    recently_post = Post.objects.filter(status=1)[:10]
-    recently_comment = Comment.objects.filter(status=1)[:10]
-
     context = {
         'posts': posts,
-        'nav_cates': nav_cates,
-        'cates': cates,
-        'side_bars': side_bars,
-        'recently_post': recently_post,
-        'recently_comment': recently_comment,
     }
+    common_context = get_common_context()
+    context.update(common_context)
+
     return render(request, 'blog/list.html', context)
 
 
@@ -69,7 +79,11 @@ def post_detail(request, post_id=None):
         post = Post.objects.get(id=post_id)
     except Post.DoesNotExist:
         raise Http404("post does not exist")
+
     context = {
         'post': post,
     }
+    common_context = get_common_context()
+    context.update(common_context)
+
     return render(request, 'blog/detail.html', context)

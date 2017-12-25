@@ -1,0 +1,48 @@
+<h1>博客</h1>
+
+<hr>
+
+<ul>
+    {% for cate in nav_cates %}
+        <li><a href="{% url 'category' cate.id %}">{{ cate.name }}</a></li>
+    {% endfor %}
+</ul>
+
+<hr>
+
+<div id="content">
+    {% block content %}
+    {% endblock %}
+</div>
+<hr>
+
+<ul>
+    {% for cate in cates %}
+        <li><a href="{% url 'category' cate.id %}">{{ cate.name }}</a></li>
+    {% endfor %}
+</ul>
+
+<hr>
+
+<h1>侧边栏</h1>
+<ul>
+    {% for side_bar in side_bars %}
+        <h2>{{ side_bar.title }}</h2>
+        {% if side_bar.display_type == 1 %}
+            <div>
+                <!-- safe标签不进行django的自动转移，等价于autoescape off -->
+                {{ side_bar.content|safe }}
+            </div>
+        {% endif %}
+        {% if side_bar.display_type == 2 %}
+            {% for post in recently_post %}
+                <li><a href="{% url 'detail' post.id %}">{{ post.title }}</a></li>
+            {% endfor %}
+        {% endif %}
+        {% if side_bar.display_type == 4 %}
+            {% for comment in recently_comment %}
+                <li><p>{{comment.content }}</p></li>
+            {% endfor %}
+        {% endif %}
+    {% endfor %}
+</ul>
