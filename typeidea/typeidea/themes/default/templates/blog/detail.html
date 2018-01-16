@@ -1,0 +1,43 @@
+{% extends "./base.html" %}
+
+{% block breadcrumb %}
+    <div class="container text-center">
+        <h2 class="breadcrumb-detail">{{ post.title }}</h2>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb post-breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'index' %}">首页</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'category' post.category_id %}">{{ post.category.name }}</a></li>
+                <li class="breadcrumb-item active" aria-current="page"><p>{{ post.title }}</p></li>
+            </ol>
+        </nav>
+    </div> 
+{% endblock %}
+{% block content %}
+    <div class="post-message post-message-detail">
+        <ul class="nav nav-pills">
+            <li>
+                <p class="nav-link">作者：{{ post.owner.username }}</p>
+            </li>
+            <li>
+                <p class="nav-link">分类：
+                <a href="{% url 'category' post.category.id %}">{{ post.category.name }}</a>
+                </p>
+            </li>
+            <li>
+                <p class="nav-link">标签：
+                {% for tag in post.tag.all %} 
+                <a href="#">{{ tag.name }}</a>
+                {% endfor %}
+                </p>
+            </li>
+            <li>
+                <p class="nav-link">时间：{{ post.created_time|date }}</p>
+            </li>
+
+        </ul>
+    </div>
+
+    <div class="post-content">
+        <p>{{ post.content }}</p>
+    </div>
+{% endblock %}

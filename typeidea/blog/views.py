@@ -32,6 +32,7 @@ class CommonContextMixin(object):
             'side_bars': side_bars,
             'recently_post': recently_post,
             'recently_comment': recently_comment,
+            'tags': Tag.objects.all(),
         }
         context.update(kwargs)
 
@@ -41,7 +42,7 @@ class CommonContextMixin(object):
 class ListPostsView(CommonContextMixin, ListView):
     model = Post
     template_name = 'blog/list.html'
-    paginate_by = 2
+    paginate_by = 3
     context_object_name = 'posts'
 
 
