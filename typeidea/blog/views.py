@@ -69,6 +69,11 @@ class CategoryView(ListPostsView):
 
         return posts
 
+    def get_context_data(self, **kwargs):
+        cate_id = self.kwargs.get('category_id', 1)  # 获得从url传递的category_id
+
+        return super(CategoryView, self).get_context_data(cate_id=cate_id)
+
 
 class TagView(ListPostsView):
     def get_queryset(self):
@@ -81,6 +86,11 @@ class TagView(ListPostsView):
             posts = tag.post_set.filter(status=1)
 
         return posts
+
+    def get_context_data(self, **kwargs):
+        tag_id = self.kwargs.get('tag_id')
+
+        return super(TagView, self).get_context_data(tag_id=tag_id)
 
 
 class PostView(CommonContextMixin, DetailView):

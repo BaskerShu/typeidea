@@ -18,6 +18,9 @@ header nav nav.post-element-nav {
     margin-left: 180px;
     font-weight: 500;
 }
+header nav nav .active {
+    color: #72c02c;
+}
 header nav nav a {
     color: #555;
 }
