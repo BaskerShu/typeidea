@@ -67,7 +67,7 @@ section {
 .main .inner .post-search input:focus {
     box-shadow: None;
 }
-.main .inner .post-search button {
+.main .inner .post-search .input-group .input-group-btn input {
     border-top-left-radius: 0px;
     border-bottom-left-radius: 0px;
     border-top-right-radius: 50px;
@@ -78,7 +78,7 @@ section {
     color: #fff;
     border: 1px solid #72c02c;
 }
-.main .inner .post-search button:hover {
+.main .inner .post-search .input-group .input-group-btn input:hover {
     background-color: #8cd54a;
     border: 1px solid #8cd54a;
 }
