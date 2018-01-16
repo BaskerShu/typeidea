@@ -1,0 +1,59 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Hello, world!</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    </head>
+    <body>
+        <header class="header-top">
+            <div class="container">
+                <nav class="nav">
+                    <a class="logo" href="{% url 'index' %}">狮子不咬人</a>
+                    <div>
+                        <nav class="nav post-element-nav">
+                            <a class="nav-link {% if isIndex and not query %}active{% endif %}" href="{% url 'index' %}">首页</a>
+                            {% for cate in nav_cates %}
+                                <a class="nav-link {% if cate_id|add:"0" == cate.id %}active{% endif %}" href="{% url 'category' cate.id %}">{{ cate.name }}</a>
+                            {% endfor %}  
+                                <a class="nav-link {% if links %}active{% endif %}" href="{% url 'link' %}">Link</a>
+                        </nav>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        
+        <section class="bg-gray-light-v5">
+            {%  block breadcrumb %}
+            {% endblock %}
+        </section>
+
+        <div class="container main">
+            {% block main %}
+            {% endblock %}
+        </div>
+
+        <div class="footer">
+            <div class="container">
+                <h5>其他分类</h5>
+                <nav class="nav nav-pills flex-column flex-sm-row">
+                    {% for cate in cates %}
+                        <a class="nav-link" href="{% url 'category' cate.id %}">{{ cate.name }}</a>
+                    {% endfor %}
+                </nav>
+            </div>
+        </div>
+        <footer class="copyright-footer">
+           <div class="container">
+                <span class="text-muted">www.ysz.com</span>    
+            </div>
+        </footer>
+
+    </body>
+</html> 

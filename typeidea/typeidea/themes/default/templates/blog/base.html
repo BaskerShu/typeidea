@@ -1,109 +1,60 @@
-{% load static %}
-<!doctype html>
-<html lang="en">
-    <head>
-        <title>Hello, world!</title>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+{% extends "./header_base.html" %}
 
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
-        <link rel="stylesheet" href="{% static 'css/base.css' %}">
-    </head>
-    <body>
-        <header class="header-top">
-            <div class="container">
-                <nav class="nav">
-                    <a class="logo" href="{% url 'index' %}">狮子不咬人</a>
-                    <div>
-                        <nav class="nav post-element-nav">
-                                <a class="nav-link {% if isIndex and not query %}active{% endif %}" href="{% url 'index' %}">首页</a>
-                            {% for cate in nav_cates %}
-                                <a class="nav-link {% if cate_id|add:"0" == cate.id %}active{% endif %}" href="{% url 'category' cate.id %}">{{ cate.name }}</a>
-                            {% endfor %}  
-                        </nav>
-                    </div>
-                </nav>
-            </div>
-        </header>
-        
-        <section class="bg-gray-light-v5">
-            {%  block breadcrumb %}
+{%  block breadcrumb %}
+{% endblock %}
+
+{% block main %}
+    <div class="row">
+        <div class="col-9">
+            {% block content %}
             {% endblock %}
-        </section>
-
-        <div class="container main">
-            <div class="row">
-                <div class="col-9">
-                    {% block content %}
-                    {% endblock %}
+        </div>
+        <div class="col-3 right-side">
+            <div class="inner">
+                <div class="post-search">
+                    <form method="GET" action="/blog" class="input-group">
+                        <input name="query" {% if query %}value={{ query }}{% endif %} autocomplete="off" type="text" class="form-control" placeholder="Search..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <span class="input-group-btn">
+                            <input class="btn btn-outline-secondary" type="submit" value="GO!">
+                        </span>
+                    </form>
                 </div>
-                <div class="col-3 right-side">
-                    <div class="inner">
-                        <div class="post-search">
-                            <form method="GET" action="/blog" class="input-group">
-                                <input name="query" {% if query %}value={{ query }}{% endif %} autocomplete="off" type="text" class="form-control" placeholder="Search..." aria-label="Recipient's username" aria-describedby="basic-addon2">
-                                <span class="input-group-btn">
-                                    <input class="btn btn-outline-secondary" type="submit" value="GO!">
-                                </span>
-                            </form>
-                        </div>
-                        {% for side_bar in side_bars %}
-                            <div class="side-bar">
-                                <h3 class="title">{{ side_bar.title }}</h3>
-                                {% if side_bar.display_type == 1 %}
-                                    <div>
-                                         <!-- safe标签不进行django的自动转移，等价于autoescape off -->
-                                         {{ side_bar.content|safe }}
-                                     </div>
-                                {% endif %}
-                                {% if side_bar.display_type == 2 %}
-                                    <ul>
-                                        {% for post in recently_post %}
-                                            <li><a href="{% url 'detail' post.id %}">{{ post.title }}</a></li>
-                                        {% endfor %}
-                                    </ul>
-                                {% endif %}
-                                {% if side_bar.display_type == 4 %}
-                                    <ul>
-                                        {% for comment in recently_comment %}
-                                            <li><p>{{comment.content }}</p></li>
-                                        {% endfor %}
-                                    </ul>
-                                {% endif %}
-                            </div>    
-                        {% endfor %}
-                            <div class="side-bar">
-                                <h3 class="title">标签</h3>
-                                <ul class="tag">
-                                    {% for tag in tags %}
-                                    <li>
-                                        <a href="{% url 'tag' tag.id %}">{{ tag.name }}</a>
-                                    </li>
-                                    {% endfor %}
-                                </ul>
-                            </div> 
+                {% for side_bar in side_bars %}
+                <div class="side-bar">
+                    <h3 class="title">{{ side_bar.title }}</h3>
+                    {% if side_bar.display_type == 1 %}
+                    <div>
+                        <!-- safe标签不进行django的自动转移，等价于autoescape off -->
+                        {{ side_bar.content|safe }}
                     </div>
+                    {% endif %}
+                    {% if side_bar.display_type == 2 %}
+                    <ul>
+                        {% for post in recently_post %}
+                        <li><a href="{% url 'detail' post.id %}">{{ post.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                    {% if side_bar.display_type == 4 %}
+                    <ul>
+                        {% for comment in recently_comment %}
+                        <li><p>{{comment.content }}</p></li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+                {% endfor %}
+                <div class="side-bar">
+                    <h3 class="title">标签</h3>
+                    <ul class="tag">
+                        {% for tag in tags %}
+                        <li>
+                            <a href="{% url 'tag' tag.id %}">{{ tag.name }}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
                 </div>
             </div>
-        </div>
-
-        <div class="footer">
-            <div class="container">
-                <h5>其他分类</h5>
-                <nav class="nav nav-pills flex-column flex-sm-row">
-                    {% for cate in cates %}
-                        <a class="nav-link" href="{% url 'category' cate.id %}">{{ cate.name }}</a>
-                    {% endfor %}
-                </nav>
-            </div>
-        </div>
-        <footer class="copyright-footer">
-           <div class="container">
-                <span class="text-muted">www.ysz.com</span>    
-            </div>
-        </footer>
-
-    </body>
-</html> 
+       </div>
+    </div>
+{% endblock %}

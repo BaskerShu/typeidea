@@ -1,0 +1,34 @@
+{% extends "../blog/header_base.html" %}
+
+{% block breadcrumb %}
+    <div class="container text-center">
+        <h2 class="breadcrumb-list">来看看我的小伙伴们</h2>    
+    </div>
+{% endblock %}
+
+{% block main %}
+    <div class="block-link">
+        <div>
+            <h2 class="link-title">Link</h2>
+            <ul class="nav">
+                {% for link in valid_links %}
+                <li class="nav-item">
+                    <a class="nav-link" target="_blank" href="{{ link.href}}">{{ link.title }}</a>
+                </li>
+                {% endfor %}  
+            </ul>
+        </div>
+        <div>
+            <h2 class="link-title">似乎消失了的小伙伴</h2>
+            <ul class="nav">
+            {% for link in invalid_links %}
+                <li class="invalid-link"><a class="nav-link" target="_blank" href="{{ link.href }}">{{ link.title }}</a></li>
+            {% endfor %}  
+            </ul>
+        </div>
+        <div>
+            <h2 class="link-title">友链申请</h2>
+            <p>新人博客，欢迎大家交换友链</p>
+        </div>
+    </div>
+{% endblock %}

@@ -293,3 +293,43 @@ section {
 .post-content {
     margin: 20px 10px; 
 }
+.block-link {
+    margin: -40px 100px -10px 200px;
+}
+.block-link div {
+    padding-bottom: 20px;
+}
+.block-link .link-title {
+    font-weight: 500;
+    position: relative;
+    margin: 20px 0;
+    font-size: 25px;
+    color: #222;
+    line-height: 35px;
+}
+.block-link .link-title:before {
+    font-weight: 800;
+    position: absolute;
+    top: 0;
+    left: -20px;
+    content: '#';
+    color: #72c02c;
+}
+.block-link ul{
+    margin-top: 10px;
+}
+.block-link ul li {
+    width: 32%;
+}
+.block-link ul li a {
+    color: #555;
+}
+.block-link ul li a:hover {
+    color: #72c02c;
+}
+.block-link .nav .invalid-link a {
+    text-decoration: line-through;
+}
+.block-link p {
+    color: #555;
+}
