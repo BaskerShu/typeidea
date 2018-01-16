@@ -41,6 +41,14 @@
                 </div>
                 <div class="col-3 right-side">
                     <div class="inner">
+                        <div class="post-search">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="button">搜索</button>
+                                </div>
+                            </div>
+                        </div>
                         {% for side_bar in side_bars %}
                             <div class="side-bar">
                                 <h3 class="title">{{ side_bar.title }}</h3>
