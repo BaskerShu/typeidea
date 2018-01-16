@@ -58,7 +58,7 @@ class IndexView(ListPostsView):
     def get_context_data(self, **kwargs):
         query = self.request.GET.get('query')
 
-        return super(IndexView, self).get_context_data(query=query)
+        return super(IndexView, self).get_context_data(query=query, isIndex=True)
 
 
 class CategoryView(ListPostsView):
@@ -91,6 +91,21 @@ class TagView(ListPostsView):
         tag_id = self.kwargs.get('tag_id')
 
         return super(TagView, self).get_context_data(tag_id=tag_id)
+
+
+class AuthorView(ListPostsView):
+    def get_queryset(self):
+        posts = super(AuthorView, self).get_queryset()
+        author_id = self.kwargs.get('author_id', 1)
+        if author_id:
+            posts = posts.filter(owner_id=author_id)
+
+        return posts
+
+    def get_context_data(self, **kwargs):
+        author_id = self.kwargs.get('author_id')
+
+        return super(AuthorView, self).get_context_data(author_id=author_id)
 
 
 class PostView(CommonContextMixin, DetailView):
