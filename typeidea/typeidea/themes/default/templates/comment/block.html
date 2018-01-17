@@ -1,15 +1,42 @@
 <!-- 评论部分 -->
-<hr/>
-
-<div class="card shadow-div" >
-  <div class="card-body">
-    <h5 class="card-title">留 言 板</h5>
-    <h6 class="card-subtitle mb-2 text-muted">留下你想对我说的话</h6>
-    <form action="/comment/" method="post" class="form-group">
-        {% csrf_token %}
-        <input name="target" class="form-control" maxlength="200" type="hidden" value="{{ request.path }}" />
-        {{ comment_form }}
-        <input class="submit-btn" type="submit" class="form-control" value="提交评论" />
-    </form>
-  </div>
+<div>
+    <div class="comment-show">
+        <div class="row comment-header">
+            <h3>评 论</h3>
+            <a class="submit-turn" href="#commentform">写评论</a>
+        </div>
+        <div class="comment-list">
+            {% if not comment_list %}
+                <div clss="no-comment">
+                    <p style="margin: 30px 10px; font-weight: 600; ">还没有评论，快来抢沙发吧！！</p>
+                </div>
+            {% else %}
+                <ul class="list-group">
+                    {% for comment in comment_list %}
+                        <li class="list-group-item">
+                            <div>
+                                <a href="{{ comment.website }}">
+                                    {{ comment.nickname }}
+                                </a>
+                                <span>{{ comment.created_time }}</span>
+                                <p>{{ comment.content }}</p>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+    <div class="card shadow-div" >
+        <div class="card-body">
+            <h5 class="card-title">留 言 板</h5>
+            <h6 class="card-subtitle mb-2 text-muted">留下你想对我说的话</h6>
+            <form id="commentform" action="/comment/" method="post" class="form-group">
+                {% csrf_token %}
+                <input name="target" class="form-control" maxlength="200" type="hidden" value="{{ request.path }}" />
+                {{ comment_form }}
+                <input class="submit-btn" type="submit" class="form-control" value="提交评论" />
+            </form>
+        </div>
+    </div>
 </div>
