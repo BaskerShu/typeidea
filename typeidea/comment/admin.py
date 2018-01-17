@@ -14,10 +14,10 @@ from typeidea.custom_site import custom_site
 class CommentAdmin(admin.ModelAdmin):
     form = CommentAdminForm
 
-    list_display = ['post', 'content', 'nickname', 'website', 'email', 'created_time', 'operator']
+    list_display = ['target', 'content', 'nickname', 'website', 'email', 'created_time', 'operator']
     list_display_links = None
-    list_filter = ['post', ]
-    search_fields = ['content', 'post__name', 'nickname']
+    list_filter = ['content', ]
+    search_fields = ['content', 'nickname']
 
     # 编辑界面
     fieldsets = (
@@ -25,7 +25,7 @@ class CommentAdmin(admin.ModelAdmin):
             'fields': ('nickname', 'website', 'email')
         }),
         ('评论', {
-            'fields': ('post', 'content')
+            'fields': ('target', 'content')
         })
     )
 
