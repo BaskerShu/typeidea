@@ -1,0 +1,9 @@
+<!-- 评论部分 -->
+
+<hr/>
+<form action="/comment/" method="post">
+    {% csrf_token %}
+    <input name="target" maxlength="200" type="hidden" value="{{ request.path }}" />
+    {{ comment_form }}
+    <input type="submit" value="Submit" />
+</form>

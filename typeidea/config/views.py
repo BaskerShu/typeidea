@@ -4,10 +4,10 @@ from __future__ import unicode_literals
 from django.views.generic.list import ListView
 
 from .models import Link
-from blog.views import CommonContextMixin
+from typeidea.views import CommonContextMixin, CommentShowMixin
 
 
-class LinkView(CommonContextMixin, ListView):
+class LinkView(CommonContextMixin, CommentShowMixin, ListView):
     model = Link
     template_name = 'config/link.html'
     context_object_name = 'links'

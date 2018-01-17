@@ -4,40 +4,8 @@ from __future__ import unicode_literals
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 
-from .models import Post, Tag, Category
-from config.models import SideBar
-from comment.models import Comment
-from comment.forms import CommentForm
-
-
-class CommonContextMixin(object):
-    def get_context_data(self, **kwargs):
-        # 分类导航
-        nav_cates = []
-        cates = []
-        categories = Category.objects.filter(status=1)
-        for cate in categories:
-            if cate.is_nav:
-                nav_cates.append(cate)
-            else:
-                cates.append(cate)
-
-        # 侧边栏
-        side_bars = SideBar.objects.filter(status=1)
-        recently_post = Post.objects.filter(status=1)[:10]
-        recently_comment = Comment.objects.filter(status=1)[:10]
-
-        context = {
-            'nav_cates': nav_cates,
-            'cates': cates,
-            'side_bars': side_bars,
-            'recently_post': recently_post,
-            'recently_comment': recently_comment,
-            'tags': Tag.objects.all(),
-        }
-        context.update(kwargs)
-
-        return super(CommonContextMixin, self).get_context_data(**context)
+from .models import Post, Tag
+from typeidea.views import CommentShowMixin, CommonContextMixin
 
 
 class ListPostsView(CommonContextMixin, ListView):
@@ -109,15 +77,8 @@ class AuthorView(ListPostsView):
         return super(AuthorView, self).get_context_data(author_id=author_id)
 
 
-class PostView(CommonContextMixin, DetailView):
+class PostView(CommonContextMixin, CommentShowMixin, DetailView):
     model = Post
     context_object_name = 'post'
     template_name = 'blog/detail.html'
     pk_url_kwarg = 'post_id'
-
-    def get_context_data(self, **kwargs):
-        kwargs.update({
-            'comment_form': CommentForm(),
-        })
-
-        return super(PostView, self).get_context_data(**kwargs)
