@@ -1,3 +1,4 @@
+/* Header */
 .header-top {
     position: relative;
     left: 0;
@@ -31,10 +32,16 @@ header nav a.logo:hover{
 header nav nav a:hover {
     color: #72c02c;
 }  
+/* END */
+
+/* Section */
 section {
     background-color: #f7f7f7;
     padding: 80px 0px;
 }
+/* END */
+
+/* SideBar */
 .main {
     padding-top: 100px;
     padding-bottom: 20px;
@@ -124,6 +131,9 @@ section {
     background-color: #72c02c;
     color: #fff;
 }
+/* END */
+
+/* Footer */
 .footer {
     padding-top: 4.28571rem;
     padding-bottom: 4.28571rem;
@@ -143,6 +153,9 @@ section {
     background-color: #111; 
     box-sizing: border-box;
 }
+/* END */
+
+/* List */
 .text-center {
     text-align: center;
 }
@@ -218,6 +231,9 @@ section {
     padding-left: 0px;
     text-align: center;
 }
+/* END */
+
+/* Pagination */
 .prev-page {
     float: left;
     display: inline-block;
@@ -265,8 +281,10 @@ section {
 .active a:hover {
     text-decoration: None;
     color: #fff;
-
 } 
+/* END */
+
+/* Detail */
 .breadcrumb-detail {
     color: #000;
     font-weight: 600;
@@ -293,6 +311,9 @@ section {
 .post-content {
     margin: 20px 10px; 
 }
+/* END */
+
+/* Link */
 .block-link {
     margin: -40px 100px -10px 200px;
 }
@@ -333,3 +354,59 @@ section {
 .block-link p {
     color: #555;
 }
+/* END */
+
+/* Comment */
+.main .shadow-div {
+    box-shadow: 0px 10px 40px 0px rgba(47,47,47,0.1);
+    border: 0px solid transparent;
+}
+.main .card h5 {
+    font-weight: 600;
+    font-size: 25px;
+}
+.main .card form {
+    margin: 20px 10px;
+}
+.main .card input {
+    width: 60%;
+    margin-bottom: 15px;
+}
+.main .card input:focus {
+    box-shadow: 0 0 0 0.2rem #8cd54a5e;
+    border-color: transparent;
+}
+.main .card textarea:focus {
+    box-shadow: 0 0 0 0.2rem #8cd54a5e;
+    border-color: transparent;
+}
+.main .card .submit-btn {
+    border-width: 2px;
+    border-style: solid;
+    border-color: #72c02c;
+    padding: 11px 33px;
+    box-sizing: border-box;
+    border-radius: 80px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 400;
+    transition: all 120ms linear;
+    margin: 30px 0px 20px 0px;
+    cursor: pointer;
+    width: 120px;
+    box-shadow: None;
+    background-color: #72c02c;
+    color: #fff;
+}
+.main .card .submit-btn:hover {
+    background-color: #fff;
+    color: #72c02c;
+    border-color: #72c02c;
+}
+.main .card .submit-btn:focus {
+    background-color: #fff;
+    color: #72c02c;
+    border-color: #72c02c;
+    box-shadow: None;
+}
+/* END */
