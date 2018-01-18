@@ -3,8 +3,9 @@ from __future__ import unicode_literals
 
 import markdown
 
-from django.contrib.auth.models import User
 from django.db import models
+from django.db.models import F
+from django.contrib.auth.models import User
 
 
 class Post(models.Model):
@@ -21,7 +22,9 @@ class Post(models.Model):
 
     is_markdown = models.BooleanField(default=True, verbose_name="使用markdown格式")
     content = models.TextField(verbose_name='内容', help_text="注：目前仅支持markdown格式")
-    html = models.TextField(verbose_name='html内容', null=True, help_text="markdown格式的内容经过转换成为html内容")
+    html = models.TextField(null=True, verbose_name='html内容', help_text="markdown格式的内容经过转换成为html内容")
+    pv = models.TextField(default=0)
+    uv = models.IntegerField(default=0)
     status = models.IntegerField(default=1, choices=STATUS_ITEMS, verbose_name="状态")
     owner = models.ForeignKey(User, verbose_name="作者")
 
@@ -47,6 +50,12 @@ class Post(models.Model):
         else:
             self.html = ""
         return super(Post, self).save()
+
+    def update_pv(self):
+        type(self).objects.filter(id=self.id).update(pv=F('pv') + 1)
+
+    def update_uv(self):
+        type(self).objects.filter(id=self.id).update(uv=F('uv') + 1)
 
     def __str__(self):
         return self.title

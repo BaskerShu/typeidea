@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.core.cache import cache
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 
@@ -82,3 +83,25 @@ class PostView(CommonContextMixin, CommentShowMixin, DetailView):
     context_object_name = 'post'
     template_name = 'blog/detail.html'
     pk_url_kwarg = 'post_id'
+
+    def get(self, request, *args, **kwargs):
+        # 先进行父类的get操作,是因为self.object只有在进行完get操作后才会拿到
+        response = super(PostView, self).get(request, *args, **kwargs)
+        self.update_pv_uv()
+
+        return response
+
+    def update_pv_uv(self):
+        session_id = self.request.COOKIES.get('sessionid')
+        path = self.request.path
+        if not session_id:
+            return
+        pv_key = 'pv:%s:%s' % (session_id, path)
+        uv_key = 'uv:%s:%s' % (session_id, path)
+
+        if not cache.get(pv_key):
+            cache.set(pv_key, 1, 60)
+            self.object.update_pv()
+        elif not cache.get(uv_key):
+            cache.set(uv_key, 1, 60 * 60 * 24)
+            self.object.update_uv()

@@ -35,8 +35,9 @@ class CommonContextMixin(object):
 
         # 侧边栏
         side_bars = SideBar.objects.filter(status=1)
-        recently_post = Post.objects.filter(status=1)[:10]
-        recently_comment = Comment.objects.filter(status=1)[:10]
+        recently_post = Post.objects.filter(status=1)[:5]
+        hot_post = Post.objects.order_by('-pv', '-id')[:8]
+        recently_comment = Comment.objects.filter(status=1)[:8]
 
         context = {
             'nav_cates': nav_cates,
@@ -44,6 +45,7 @@ class CommonContextMixin(object):
             'side_bars': side_bars,
             'recently_post': recently_post,
             'recently_comment': recently_comment,
+            'hot_post': hot_post,
             'tags': Tag.objects.all(),
         }
         context.update(kwargs)

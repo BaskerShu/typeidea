@@ -16,7 +16,7 @@ class PostAdmin(BaseOwnerAdmin):
     form = PostAdminForm
 
     list_display = ['title', 'category', 'content', 'status',
-                    'owner', 'created_time', 'operator']
+                    'pv', 'uv', 'owner', 'created_time', 'operator']
     list_display_links = None
     list_filter = ['category', 'owner']
     search_fields = ['title', 'category__name']

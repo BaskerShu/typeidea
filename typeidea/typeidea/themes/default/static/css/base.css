@@ -100,8 +100,8 @@ section {
 }
 
 .main .right-side .inner .side-bar {
-    padding-top: 50px;
-    margin-bottom: 50px;
+    padding-top: 35px;
+    margin-bottom: 35px;
     border-top: 1px solid #eee;
 }
 .main .right-side .inner .side-bar ul {
@@ -109,6 +109,7 @@ section {
 }
 .main .right-side .inner .side-bar li {
     list-style: none;
+    margin: 3px 0px;
 }
 .main .right-side .inner .side-bar a {
     color: #777;

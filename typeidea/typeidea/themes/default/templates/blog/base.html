@@ -28,15 +28,19 @@
                             <!-- safe标签不进行django的自动转移，等价于autoescape off -->
                             {{ side_bar.content|safe }}
                         </div>
-                        {% endif %}
-                        {% if side_bar.display_type == 2 %}
+                        {% elif side_bar.display_type == 2 %}
                         <ul>
                             {% for post in recently_post %}
                             <li><a href="{% url 'detail' post.id %}">{{ post.title }}</a></li>
                             {% endfor %}
                         </ul>
-                        {% endif %}
-                        {% if side_bar.display_type == 4 %}
+                        {% elif side_bar.display_type == 3 %}
+                        <ul>
+                            {% for post in hot_post %}
+                            <li><a href="{% url 'detail' post.id %}">{{ post.title }}</a></li>
+                            {% endfor %}
+                        </ul>
+                        {% elif side_bar.display_type == 4 %}
                         <ul>
                             {% for comment in recently_comment %}
                             <li><p>{{comment.content }}</p></li>
