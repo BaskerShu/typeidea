@@ -1,0 +1,34 @@
+li.L0, li.L1, li.L2, li.L3,
+li.L5, li.L6, li.L7, li.L8 {
+    list-style-type: decimal !important;
+}
+.code-padding {
+    padding: 10px;
+}
+#post-content {
+    margin: 20px 10px; 
+}
+#post-content h1, h2, h3, h4, h5, h6 {
+    text-rendering: optimizelegibility;
+    line-height: 1.7;
+    margin: 0 0 15px;
+    font-weight: 700;
+}
+#post-content h1 {
+    font-size: 26px;
+}
+#post-content h2 {
+    font-size: 24px;
+}
+#post-content h3 {
+    font-size: 22px;
+}
+#post-content h4 {
+    font-size: 20px;
+}
+#post-content h5 {
+    font-size: 18px;
+}
+#post-content h6 {
+    font-size: 16px;
+}

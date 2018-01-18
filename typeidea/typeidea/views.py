@@ -49,5 +49,3 @@ class CommonContextMixin(object):
         context.update(kwargs)
 
         return super(CommonContextMixin, self).get_context_data(**context)
-
-

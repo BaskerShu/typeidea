@@ -28,7 +28,8 @@ class PostAdmin(BaseOwnerAdmin):
         ('title', 'category'),
         'desc',
         'status',
-        'content',
+        ('content', 'is_markdown'),
+        'html',
         'tag'
     )
     filter_horizontal = ['tag']  # 多对多字段管理

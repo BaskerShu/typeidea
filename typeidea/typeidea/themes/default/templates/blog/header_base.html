@@ -10,6 +10,8 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="{% static 'css/base.css' %}">
+        {% block style %}
+        {% endblock %}
     </head>
     <body>
         <header class="header-top">
@@ -30,7 +32,7 @@
         </header>
         
         <section class="bg-gray-light-v5">
-            {%  block breadcrumb %}
+            {% block breadcrumb %}
             {% endblock %}
         </section>
 
@@ -53,6 +55,8 @@
            <div class="container">
                 <span class="text-muted">www.ysz.com</span>    
             </div>
+            {% block javascript %}
+            {% endblock %}
         </footer>
 
     </body>

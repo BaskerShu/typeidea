@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import markdown
+
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -17,7 +19,9 @@ class Post(models.Model):
     category = models.ForeignKey('Category', verbose_name="分类")
     tag = models.ManyToManyField('Tag', verbose_name="标签")
 
+    is_markdown = models.BooleanField(default=True, verbose_name="使用markdown格式")
     content = models.TextField(verbose_name='内容', help_text="注：目前仅支持markdown格式")
+    html = models.TextField(verbose_name='html内容', null=True, help_text="markdown格式的内容经过转换成为html内容")
     status = models.IntegerField(default=1, choices=STATUS_ITEMS, verbose_name="状态")
     owner = models.ForeignKey(User, verbose_name="作者")
 
@@ -26,6 +30,23 @@ class Post(models.Model):
     def status_show(self):
         return '当前状态: {!s}'.format(self.status)
     status_show.short_description = '状态显示'
+
+    def save(self, *args, **kwargs):
+        if self.is_markdown:
+            config = {
+                'codehilite': {
+                    'use_pygments': False,
+                    'css_class': 'prettyprint linenums code-padding',
+                }
+            }
+            self.html = markdown.markdown(
+                self.content,
+                extensions=["codehilite"],
+                extension_configs=config
+            )
+        else:
+            self.html = ""
+        return super(Post, self).save()
 
     def __str__(self):
         return self.title

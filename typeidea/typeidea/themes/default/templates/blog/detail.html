@@ -1,4 +1,10 @@
 {% extends "./base.html" %}
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/markdown-skin/desert.css' %}">
+    <link rel="stylesheet" href="{% static 'css/markdown-style.css' %}">
+{% endblock %}
 
 {% block breadcrumb %}
     <div class="container text-center">
@@ -39,10 +45,20 @@
         </ul>
     </div>
 
-    <div class="post-content">
-        <p>{{ post.content }}</p>
+    <div id="post-content">
+        {% if post.is_markdown %}
+            {% autoescape off %}
+                {{ post.html }}
+            {% endautoescape %}
+        {% else %}
+            {{ post.content }}
+        {% endif %}
     </div>
 
     {% include '../comment/block.html %}
 
 {% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript" src="{% static 'js/prettify.js' %}" onload="PR.prettyPrint();"></script>
+{% endblock%}
