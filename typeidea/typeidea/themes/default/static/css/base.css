@@ -49,7 +49,10 @@ section {
 }
 .main .right-side {
     padding: 0px 15px;
+}
+.main .right-side .border-left {
     border-left: 1px solid #eee;
+    padding-bottom: 20px;
 }
 .main .right-side .inner {
     padding-left: 20px;
@@ -95,6 +98,7 @@ section {
 .main .inner .post-search button:focus {
     box-shadow: None;
 }
+
 .main .right-side .inner .side-bar {
     padding-top: 50px;
     margin-bottom: 50px;

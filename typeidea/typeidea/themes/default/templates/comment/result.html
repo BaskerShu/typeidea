@@ -1,5 +1,20 @@
-{% if success %}
-    <p>评论成功</p>
-{% else %}
-    {{ comment_form }}
-{% endif %}
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>评论结果页</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    </head>
+    <body>
+        {% if success %}
+            <p>评论成功</p>
+            <a href="{{ target }}">返回</a>
+        {% else %}
+            {% for field, message in comment_form.errors.items %}
+                {{ message }}
+            {% endfor %}
+            <a href="javascript: window.history.back()">返回</a>
+        {% endif %}
+    </body>
+</html>

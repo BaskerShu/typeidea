@@ -10,49 +10,51 @@
             {% endblock %}
         </div>
         <div class="col-3 right-side">
-            <div class="inner">
-                <div class="post-search">
-                    <form method="GET" action="/blog" class="input-group">
-                        <input name="query" {% if query %}value={{ query }}{% endif %} autocomplete="off" type="text" class="form-control" placeholder="Search..." aria-label="Recipient's username" aria-describedby="basic-addon2">
-                        <span class="input-group-btn">
-                            <input class="btn btn-outline-secondary" type="submit" value="GO!">
-                        </span>
-                    </form>
-                </div>
-                {% for side_bar in side_bars %}
-                <div class="side-bar">
-                    <h3 class="title">{{ side_bar.title }}</h3>
-                    {% if side_bar.display_type == 1 %}
-                    <div>
-                        <!-- safe标签不进行django的自动转移，等价于autoescape off -->
-                        {{ side_bar.content|safe }}
+            <div class="border-left">
+                <div class="inner">
+                    <div class="post-search">
+                        <form method="GET" action="/blog" class="input-group">
+                            <input name="query" {% if query %}value={{ query }}{% endif %} autocomplete="off" type="text" class="form-control" placeholder="Search..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+                            <span class="input-group-btn">
+                                <input class="btn btn-outline-secondary" type="submit" value="GO!">
+                            </span>
+                        </form>
                     </div>
-                    {% endif %}
-                    {% if side_bar.display_type == 2 %}
-                    <ul>
-                        {% for post in recently_post %}
-                        <li><a href="{% url 'detail' post.id %}">{{ post.title }}</a></li>
-                        {% endfor %}
-                    </ul>
-                    {% endif %}
-                    {% if side_bar.display_type == 4 %}
-                    <ul>
-                        {% for comment in recently_comment %}
-                        <li><p>{{comment.content }}</p></li>
-                        {% endfor %}
-                    </ul>
-                    {% endif %}
-                </div>
-                {% endfor %}
-                <div class="side-bar">
-                    <h3 class="title">标签</h3>
-                    <ul class="tag">
-                        {% for tag in tags %}
-                        <li>
-                            <a href="{% url 'tag' tag.id %}">{{ tag.name }}</a>
-                        </li>
-                        {% endfor %}
-                    </ul>
+                    {% for side_bar in side_bars %}
+                    <div class="side-bar">
+                        <h3 class="title">{{ side_bar.title }}</h3>
+                        {% if side_bar.display_type == 1 %}
+                        <div>
+                            <!-- safe标签不进行django的自动转移，等价于autoescape off -->
+                            {{ side_bar.content|safe }}
+                        </div>
+                        {% endif %}
+                        {% if side_bar.display_type == 2 %}
+                        <ul>
+                            {% for post in recently_post %}
+                            <li><a href="{% url 'detail' post.id %}">{{ post.title }}</a></li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                        {% if side_bar.display_type == 4 %}
+                        <ul>
+                            {% for comment in recently_comment %}
+                            <li><p>{{comment.content }}</p></li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                    <div class="side-bar">
+                        <h3 class="title">标签</h3>
+                        <ul class="tag">
+                            {% for tag in tags %}
+                            <li>
+                                <a href="{% url 'tag' tag.id %}">{{ tag.name }}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
                 </div>
             </div>
        </div>
