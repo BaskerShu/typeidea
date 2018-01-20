@@ -48,7 +48,7 @@ class Post(models.Model):
                 extension_configs=config
             )
         else:
-            self.html = ""
+            self.html = self.content
         return super(Post, self).save()
 
     def update_pv(self):

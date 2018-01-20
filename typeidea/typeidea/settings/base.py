@@ -25,8 +25,13 @@ INSTALLED_APPS = [
     'comment',
     'typeidea',
 
+    # xamin配置
     'xadmin',
     'crispy_forms',
+
+    # autocomplete配置
+    'dal',
+    'dal_select2',
 
     'django.contrib.admin',
     'django.contrib.auth',

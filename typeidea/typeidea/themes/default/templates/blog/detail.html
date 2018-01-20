@@ -46,13 +46,9 @@
     </div>
 
     <div id="post-content">
-        {% if post.is_markdown %}
-            {% autoescape off %}
-                {{ post.html }}
-            {% endautoescape %}
-        {% else %}
-            {{ post.content }}
-        {% endif %}
+        {% autoescape off %}
+            {{ post.html }}
+        {% endautoescape %}
     </div>
 
     {% include '../comment/block.html %}
