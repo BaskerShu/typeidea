@@ -2,14 +2,22 @@
 from __future__ import unicode_literals
 
 import xadmin
+from rest_framework import routers
+from rest_framework.documentation import include_docs_urls
 from django.conf import settings
 from django.conf.urls import url, include
 from django.conf.urls.static import static
 
 from .autocomplete import CategoryAutocomplete, TagAutocomplete
+from blog.api.views import PostViewSet, TagViewSet, CategoryViewSet
 
 
 xadmin.autodiscover()
+
+router = routers.DefaultRouter()
+router.register(r'posts', PostViewSet)
+router.register(r'categories', CategoryViewSet)
+router.register(r'tags', TagViewSet)
 
 urlpatterns = [
     url(r'^blog/', include('blog.urls')),
@@ -27,4 +35,6 @@ urlpatterns = [
         name='tag-autocomplete',
     ),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
+    url(r'^api/', include(router.urls)),
+    url(r'^api/docs/', include_docs_urls(title='Typeidea api'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

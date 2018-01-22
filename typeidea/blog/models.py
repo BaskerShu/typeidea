@@ -23,7 +23,7 @@ class Post(models.Model):
     is_markdown = models.BooleanField(default=True, verbose_name="使用markdown格式")
     content = models.TextField(verbose_name='内容', help_text="注：目前仅支持markdown格式")
     html = models.TextField(null=True, verbose_name='html内容', help_text="markdown格式的内容经过转换成为html内容")
-    pv = models.TextField(default=0)
+    pv = models.IntegerField(default=0)
     uv = models.IntegerField(default=0)
     status = models.IntegerField(default=1, choices=STATUS_ITEMS, verbose_name="状态")
     owner = models.ForeignKey(User, verbose_name="作者")

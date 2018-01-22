@@ -25,17 +25,19 @@ INSTALLED_APPS = [
     'comment',
     'typeidea',
 
-    # xamin配置
-    'xadmin',
-    'crispy_forms',
-
     # 富文本插件
     'ckeditor',
     'ckeditor_uploader',
 
+    'rest_framework',
+
     # autocomplete配置
     'dal',
     'dal_select2',
+
+    # xamin配置
+    'xadmin',
+    'crispy_forms',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -143,3 +145,9 @@ CKEDITOR_UPLOAD_PATH = 'content/ckeditor/'
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 DEFAULT_FILE_STORAGE = 'typeidea.storage.MyFileSystemStorage'
+
+# REST分页设置
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 3
+}
