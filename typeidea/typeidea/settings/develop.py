@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 
-from .base import *
+from .base import *  # NOQA
 
 DEBUG = True
 
