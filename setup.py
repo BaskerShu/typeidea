@@ -4,7 +4,7 @@ packages = find_packages('typeidea')
 print(packages)
 setup(
     name='typeidea',
-    version='0.6',
+    version='0.7',
     url='https://www.ysz.com/',
     author='Lion',
     author_email='yangshuzhi@outlook.com',
@@ -25,6 +25,10 @@ setup(
         'mysqlclient==1.3.12',
         'Pillow==5.0.0',
         'coreapi==2.3.3',
+        'gunicorn==19.7.1',
+        'django-redis==4.8.0',
+        'hiredis==0.2.0',
+        'redis==2.10.6',
         'gunicorn==19.7.1',
     ],
 )
