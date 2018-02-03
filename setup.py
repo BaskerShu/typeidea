@@ -4,7 +4,7 @@ packages = find_packages('typeidea')
 print(packages)
 setup(
     name='typeidea',
-    version='0.7',
+    version='1.0',
     url='https://www.ysz.com/',
     author='Lion',
     author_email='yangshuzhi@outlook.com',
@@ -30,5 +30,6 @@ setup(
         'hiredis==0.2.0',
         'redis==2.10.6',
         'gunicorn==19.7.1',
+        'raven==6.5.0',
     ],
 )

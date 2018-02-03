@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import os
 
+import raven
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -45,7 +47,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'raven.contrib.django.raven_compat',
 ]
+
+RAVEN_CONFIG = {
+    'dsn': 'http://ab2371461063409db01789daa8d8cc31:355a2e40d2004263be50071c66d2862e@192.168.65.128:9000/1',
+    'release': u'3b1fc3a3829c13c67b9ec95ad021898f814c30fc',
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -90,7 +99,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
