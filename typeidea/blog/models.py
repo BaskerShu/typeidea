@@ -36,6 +36,7 @@ class Post(models.Model):
 
     def save(self, *args, **kwargs):
         if self.is_markdown:
+            # import pdb;pdb.set_trace()
             config = {
                 'codehilite': {
                     'use_pygments': False,
@@ -44,7 +45,7 @@ class Post(models.Model):
             }
             self.html = markdown.markdown(
                 self.content,
-                extensions=["codehilite"],
+                extensions=["codehilite", 'fenced_code'],
                 extension_configs=config
             )
         else:

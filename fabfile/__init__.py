@@ -12,12 +12,12 @@ from fabfile.pypi import pip
 
 env.roledefs = {
     'developserver': [
-        'baskershu@192.168.65.128:22',
+        'baskershu@65.49.132.45:26266',
     ],
 }
 
 
-WORKSAPCE_PATH = '/home/baskershu/workspace'
+WORKSAPCE_PATH = '/home/baskershu/myblog'
 
 
 def get_env_path(virtualenv_name):

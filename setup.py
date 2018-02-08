@@ -4,7 +4,7 @@ packages = find_packages('typeidea')
 print(packages)
 setup(
     name='typeidea',
-    version='1.0',
+    version='1.0.0',
     url='https://www.ysz.com/',
     author='Lion',
     author_email='yangshuzhi@outlook.com',

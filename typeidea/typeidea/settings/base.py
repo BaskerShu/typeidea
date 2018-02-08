@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 
-import raven
+# import raven
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -11,7 +11,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '15ko3vdej81)@=x2j6rz6(7t2$r8r&u8b@%+1gisa-myt$labp'
+SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -31,6 +31,9 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
 
+    'markdownx',
+    'simditor',
+
     'rest_framework',
 
     # autocomplete配置
@@ -41,20 +44,19 @@ INSTALLED_APPS = [
     'xadmin',
     'crispy_forms',
 
+    'django.forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    'raven.contrib.django.raven_compat',
 ]
 
-RAVEN_CONFIG = {
-    'dsn': 'http://ab2371461063409db01789daa8d8cc31:355a2e40d2004263be50071c66d2862e@192.168.65.128:9000/1',
-    'release': u'3b1fc3a3829c13c67b9ec95ad021898f814c30fc',
-}
+# RAVEN_CONFIG = {
+#     'dsn': 'http://ab2371461063409db01789daa8d8cc31:355a2e40d2004263be50071c66d2862e@192.168.65.128:9000/1',
+#     'release': '1.0.1',
+# }
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -118,11 +120,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 THEME = "themes/default"
-STATIC_ROOT = '../static_files/'
+STATIC_ROOT = 'static_files/'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, THEME, "static"),
 ]
+
+FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
 
 TEMPLATES = [
     {
@@ -158,4 +162,28 @@ DEFAULT_FILE_STORAGE = 'typeidea.storage.MyFileSystemStorage'
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 3
+}
+
+# markdownx设置
+# config = {
+#     'codehilite': {
+#         'use_pygments': False,
+#         'css_class': 'prettyprint linenums code-padding',
+#     }
+# }
+# self.html = markdown.markdown(
+#     self.content,
+#     extensions=["codehilite"],
+#     extension_configs=config
+# )
+MARKDOWNX_MARKDOWN_EXTENSIONS = [
+    'codehilite',
+    'fenced_code',
+]
+
+MARKDOWNX_MARKDOWN_EXTENSION_CONFIGS = {
+    'codehilite': {
+        'use_pygments': False,
+        'css_class': 'prettyprint linenums',
+    }
 }

@@ -19,7 +19,10 @@ def upload_config(config, virtualenv_path):
 
 def ensure_package():
     result = run('which supervisord', warn_only=True)
-    return bool(result)
+    if 'no supervisord' in result:
+        return False
+    else:
+        return True
 
 
 def ensure_progress():

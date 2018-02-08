@@ -18,7 +18,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'typeidea_db',
         'USER': 'root',
-        'PASSWORD': 'yang1994',
+        'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '3306',
     }
