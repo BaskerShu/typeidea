@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^blog/', include('blog.urls')),
     url(r'^link/', include('config.urls')),
     url(r'^comment/', include('comment.urls')),
+    url(r'^account/', include('account.urls')),
     url(r'^admin/', xadmin.site.urls),
     url(
         r'^category-autocomplete/$',

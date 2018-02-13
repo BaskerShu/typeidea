@@ -1,0 +1,39 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+    <head>
+        {% block title %}
+        {% endblock %}
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+        <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{% static 'css/markdown-skin/desert.css' %}">
+        <link rel="stylesheet" href="{% static 'css/account/base.css' %}">
+        <link rel="stylesheet" href="{% static 'css/fontawesome/fontawesome-all.css' %}">
+        {% block style %}
+        {% endblock %}
+    </head>
+    <body>
+        <div class="sign">
+            <div class="logo">
+                <a href="{% url 'index' %}">
+                    <img src="/media/logo/logo-smallb.png" alt="logo"/>
+                </a>
+            </div>
+            <div class="main">
+                <h4 class="h4">
+                    <div class="normal-title">
+                        <a class="active" href="{% url 'login' %}">登录</a>
+                        <b>·</b>
+                        <a href="{% url 'register' %}">注册</a>
+                    </div>
+                </h4>
+                {% block main %}
+                {% endblock %}
+            </div>
+        </div>
+    </body>
+</html>
