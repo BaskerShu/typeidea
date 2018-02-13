@@ -13,7 +13,7 @@ class CustomAdminMarkdownxWidget(AdminMarkdownxWidget):
             ]
         }
         js = [
-            'markdownx/js/markdownx{}.js'.format('.min'),
+            'markdownx/js/markdownx{}.js'.format(''),
             'js/prettify.js',
             'js/markdownx-widget.js',
         ]

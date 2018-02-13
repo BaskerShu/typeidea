@@ -26,13 +26,14 @@ INSTALLED_APPS = [
     'config',
     'comment',
     'typeidea',
+    'account',
 
     # 富文本插件
-    'ckeditor',
-    'ckeditor_uploader',
+    # 'ckeditor',
+    # 'ckeditor_uploader',
 
     'markdownx',
-    'simditor',
+    # 'simditor',
 
     'rest_framework',
 
@@ -165,20 +166,10 @@ REST_FRAMEWORK = {
 }
 
 # markdownx设置
-# config = {
-#     'codehilite': {
-#         'use_pygments': False,
-#         'css_class': 'prettyprint linenums code-padding',
-#     }
-# }
-# self.html = markdown.markdown(
-#     self.content,
-#     extensions=["codehilite"],
-#     extension_configs=config
-# )
 MARKDOWNX_MARKDOWN_EXTENSIONS = [
     'codehilite',
     'fenced_code',
+    'nl2br',
 ]
 
 MARKDOWNX_MARKDOWN_EXTENSION_CONFIGS = {
@@ -187,3 +178,9 @@ MARKDOWNX_MARKDOWN_EXTENSION_CONFIGS = {
         'css_class': 'prettyprint linenums',
     }
 }
+MARKDOWNX_SERVER_CALL_LATENCY = 1500
+MARKDOWNX_EDITOR_RESIZABLE = True
+
+# account设置
+LOGIN_URL = '/account/login'
+LOGIN_REDIRECT_URL ='/blog'

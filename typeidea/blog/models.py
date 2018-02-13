@@ -21,7 +21,7 @@ class Post(models.Model):
     tag = models.ManyToManyField('Tag', verbose_name="标签")
 
     is_markdown = models.BooleanField(default=True, verbose_name="使用markdown格式")
-    content = models.TextField(verbose_name='内容', help_text="注：使用markdown模式时使用源码进行编译")
+    content = models.TextField(verbose_name='内容', help_text="注：目前仅仅支持markdown格式")
     html = models.TextField(null=True, verbose_name='html内容', help_text="markdown格式的内容经过转换成为html内容")
     pv = models.IntegerField(default=0)
     uv = models.IntegerField(default=0)
@@ -45,7 +45,7 @@ class Post(models.Model):
             }
             self.html = markdown.markdown(
                 self.content,
-                extensions=["codehilite", 'fenced_code'],
+                extensions=["codehilite", 'fenced_code', 'nl2br'],
                 extension_configs=config
             )
         else:

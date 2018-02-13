@@ -15,7 +15,7 @@ from typeidea.adminx import BaseOwnerAdmin
 class PostAdmin(BaseOwnerAdmin):
     form = PostAdminForm
 
-    list_display = ['title', 'category', 'content', 'status',
+    list_display = ['title', 'category', 'status',
                     'pv', 'uv', 'owner', 'created_time']
     list_display_links = None
     list_filter = ['category', 'owner']
