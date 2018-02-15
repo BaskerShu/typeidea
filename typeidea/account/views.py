@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
+from django.http import HttpResponseRedirect, Http404
 from django.views.generic import FormView
 from django.core.urlresolvers import reverse
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 
 from .forms import ProfileForm, RegisterForm
@@ -15,12 +16,14 @@ class RegisterView(FormView):
     form_class = RegisterForm
     success_url = reverse_lazy('profile_home')
 
-    def post(self, request, *args, **kwargs):
-        register_form = RegisterForm(request.POST)
-        if register_form.is_valid():
-            register_form.save()
+    def form_valid(self, form):
+        form.save()
+        username = form.cleaned_data.get("username")
+        password = form.cleaned_data.get("password1")
+        user = authenticate(username=username, password=password)
+        login(self.request, user)
 
-            return HttpResponseRedirect(self.get_success_url())
+        return HttpResponseRedirect(self.get_success_url())
 
 
 @login_required
@@ -33,3 +36,9 @@ def profile_home(request):
 class ProfileView(FormView):
     template_name = 'account/profile.html'
     form_class = ProfileForm
+
+    def get(self, request, *args, **kwargs):
+        username = kwargs.get('username')
+        if username != request.user.username:
+            raise Http404('当前页面不存在')
+        return self.render_to_response(self.get_context_data())

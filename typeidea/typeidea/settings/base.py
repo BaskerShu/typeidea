@@ -45,6 +45,11 @@ INSTALLED_APPS = [
     'xadmin',
     'crispy_forms',
 
+    # 表单验证码
+    'captcha',
+
+    'widget_tweaks',
+
     'django.forms',
     'django.contrib.admin',
     'django.contrib.auth',

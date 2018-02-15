@@ -4,13 +4,14 @@ from __future__ import unicode_literals
 from django.conf.urls import url
 from django.contrib.auth.views import LoginView
 
+from .forms import LoginForm
 from .views import profile_home, ProfileView, RegisterView
 
 urlpatterns = [
     url(r'login/$',
         LoginView.as_view(
             template_name='account/login.html',
-            redirect_field_name='account/profile.html',
+            form_class=LoginForm,
         ),
         name='login'),
     url(r'register/$', RegisterView.as_view(), name='register'),

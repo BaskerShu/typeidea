@@ -21,6 +21,8 @@ setup(
         'django-ckeditor==5.4.0',
         'django-debug-toolbar==1.9.1',
         'django-rest-framework==0.1.0',
+        'django-widget-tweaks==1.4.1',
+        'django-simple-captcha==0.5.6',
         'Markdown==2.6.11',
         'mysqlclient==1.3.12',
         'Pillow==5.0.0',

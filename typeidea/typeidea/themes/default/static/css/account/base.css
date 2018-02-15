@@ -1,9 +1,18 @@
+body {
+    background-color: #f1f1f1;
+}
 .sign {
     height: 100%;
     min-height: 750px;
     text-align: center;
     font-size: 14px;
     background-color: #f1f1f1;
+}
+.sign:before {
+    content: "";
+    display: inline-block;
+    height: 85%;
+    vertical-align: middle;
 }
 .logo {
     position: absolute;
@@ -12,11 +21,104 @@
 }
 .main {
     width: 400px;
-    margin: 60px auto 0;
-    padding: 50px 50px 30px;
+    margin: 120px auto 0;
+    padding: 50px;
     background-color: #fff;
     border-radius: 4px;
     box-shadow: 0 0 8px rgba(0,0,0,.1);
     vertical-align: middle;
     display: inline-block;
+}
+.main .title {
+    margin: 0 auto 50px;
+    padding: 10px;
+    font-weight: 400;
+    color: #969696;
+}
+.main h4 {
+    font-size: 20px;
+}
+.main .title a {
+    padding: 10px;
+    color: #969696;
+}
+.main .title a:hover,
+.main .title a:focus {
+    text-decoration: none;
+}
+
+.main .title a:hover {
+    border-bottom: 2px solid #ea6f5a;
+}
+.main .title .active {
+    font-weight: 700;
+    color: #ea6f5a;
+    border-bottom: 2px solid #ea6f5a;
+}
+.main form input {
+    border-bottom: none;
+    height: 50px;
+    margin-bottom: 0;
+    padding: 4px 12px 4px 15px;
+    border: 1px solid #c8c8c8;
+    border-radius: 0px;
+    vertical-align: middle;
+    background: transparent;
+}
+.main form input:focus {
+    outline: none;
+    box-shadow: none;
+    border: 1px solid #c8c8c8;
+}
+.main form i {
+    width: 22px;
+}
+.main .captcha-div {
+    padding: 20px 0px 40px 0px;
+}
+.main .captcha-div .captcha-refresh {
+    height: 50px;
+    width: 120px;
+}
+.main .captcha-div .captcha-refresh img {
+    position: absolute;
+    top: 8px;
+    right: 20px;
+}
+.main .captcha-div #id_captcha_1 {
+    width: 1%; 
+}
+.main form .invalid {
+    width: 100%;
+    padding-left: 3px;
+    padding-top: .25rem;
+    padding-bottom: .5rem;
+    font-size: 80%;
+    color: #dc3545;
+    text-align: left;
+    font-weight: 800;
+}
+.main form .button {
+    width: 100%;
+    padding: 9px 18px;
+    font-size: 18px;
+    border: none;
+    border-radius: 25px;
+    color: #fff;
+    cursor: pointer;
+    outline: none;
+    display: block;
+    clear: both;
+}
+.main form .login-button {
+    background: #3194d0;
+}
+.main form .login-button:hover {
+    background: #187cb7;
+}
+.main form .register-button {
+    background: #42c02e;
+}
+.main form .register-button:hover {
+    background: #3db922;
 }

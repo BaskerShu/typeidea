@@ -1,0 +1,50 @@
+{% load widget_tweaks %}
+
+{% csrf_token %}
+{% for hidden_field in form.hidden_fields %}
+    {{ hidden_field }}
+{% endfor %}
+
+{% if form.non_field_errors %}
+<div class="alert alert-danger" role="alert">
+    {% for error in form.non_field_errors %}
+        {{ error }}
+    {% endfor %}
+</div>
+{% endif %}
+
+{% for field in form.visible_fields %}
+    <div class="form-row {% if 'captcha' in field.name %}captcha-div{% endif %}" >
+        <div class="input-group">
+            <label class="sr-only" for="{{ field.name }}">{{ field.label }}</label>
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        {% if 'username' in field.name %}
+                            <i class="fas fa-user-circle"></i>
+                        {% elif 'password' in field.name and '2' not in field.name %}
+                            <i class="fas fa-unlock"></i>
+                        {% elif 'password' in field.name and '2' in field.name %}
+                            <i class="fas fa-unlock-alt"></i>
+                        {% elif 'email' in field.name %}
+                            <i class="fas fa-envelope"></i>
+                        {% elif 'captcha' in field.name %}
+                            <i class="fas fa-shield-alt"></i>
+                        {% endif %}
+                    </div>
+                </div>
+
+            {% render_field field class="form-control" placeholder=field.label %}
+
+            {% if form.is_bound %}
+                {% if field.errors %}
+                    {% for error in field.errors %}
+                        <div class="invalid">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endif %}
+
+        </div>
+    </div>
+{% endfor %}

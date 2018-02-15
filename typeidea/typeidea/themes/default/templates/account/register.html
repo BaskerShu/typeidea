@@ -1,6 +1,20 @@
-<h2>register</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Login</button>
-</form>
+{% extends "./base.html" %}
+{% load widget_tweaks %}
+{% load static %}
+
+{% block title %}
+<title>注册|狮子不咬人</title>
+{% endblock %}
+
+{% block main %}
+    <form method="post" class="needs-validation" novalidate captcha-refresh-url={% url 'captcha-refresh' %}>
+        {% include './form.html' with form=form %}
+        <input type="submit" name="commit" value="登录" class="button register-button" data-disable-with="登录">
+    </form>
+{% endblock %}
+
+{% block javascript %}
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="{% static 'js/account/form.js' %}"></script>
+    <script src="{% static 'js/account/register.js' %}"></script>
+{% endblock %}
