@@ -33,5 +33,6 @@ setup(
         'redis==2.10.6',
         'gunicorn==19.7.1',
         'raven==6.5.0',
+        'django-imagekit==4.0.2',
     ],
 )

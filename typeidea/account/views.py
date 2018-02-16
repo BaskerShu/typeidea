@@ -22,7 +22,6 @@ class RegisterView(FormView):
         password = form.cleaned_data.get("password1")
         user = authenticate(username=username, password=password)
         login(self.request, user)
-
         return HttpResponseRedirect(self.get_success_url())
 
 
@@ -36,9 +35,19 @@ def profile_home(request):
 class ProfileView(FormView):
     template_name = 'account/profile.html'
     form_class = ProfileForm
+    success_url = reverse_lazy('index')
 
     def get(self, request, *args, **kwargs):
         username = kwargs.get('username')
         if username != request.user.username:
             raise Http404('当前页面不存在')
         return self.render_to_response(self.get_context_data())
+
+    def form_valid(self, form):
+        form.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_form(self, form_class=None):
+        if form_class is None:
+            form_class = self.get_form_class()
+        return form_class(instance=self.request.user.profile, **self.get_form_kwargs())

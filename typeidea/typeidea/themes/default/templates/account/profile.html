@@ -1,6 +1,10 @@
 <h2>profile</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Login</button>
+
+<form method="post" class="needs-validation" enctype="multipart/form-data" novalidate captcha-refresh-url={% url 'captcha-refresh' %}>
+    <div>
+        <img src="{{ form.instance.avatar.url }}"/>
+    </div>
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" name="commit" value="保存" class="button login-button">
 </form>

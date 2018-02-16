@@ -50,6 +50,9 @@ INSTALLED_APPS = [
 
     'widget_tweaks',
 
+    # 图片处理
+    'imagekit',
+
     'django.forms',
     'django.contrib.admin',
     'django.contrib.auth',
