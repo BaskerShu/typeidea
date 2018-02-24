@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-
 from markdownx.widgets import AdminMarkdownxWidget
+from django.forms.widgets import ClearableFileInput
 
 
 class CustomAdminMarkdownxWidget(AdminMarkdownxWidget):
@@ -17,3 +17,7 @@ class CustomAdminMarkdownxWidget(AdminMarkdownxWidget):
             'js/prettify.js',
             'js/markdownx-widget.js',
         ]
+
+
+class CustomImageFileInput(ClearableFileInput):
+    template_name = 'customforms/custom_image.html'

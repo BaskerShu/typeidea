@@ -1,5 +1,20 @@
 <!-- 评论部分 -->
 <div>
+    <div class="card shadow-div" >
+        <div class="card-body">
+            <form id="commentform" action="/comment/" method="post" class="new-commnet">
+                <a class="avatar" style="width:36px">
+                    <img src="{{ request.user.profile.avatar.url }}" class="rounded-circle">
+                </a>
+                {% csrf_token %}
+                <input name="target" class="form-control" maxlength="200" type="hidden" value="{{ request.path }}" />
+                {{ comment_form }}
+                <div>
+                    <input class="submit-btn" type="submit" class="form-control" value="提交评论" />
+                </div>
+            </form>
+        </div>
+    </div>
     <div class="comment-show">
         <div class="row comment-header">
             <h3>评 论</h3>
@@ -25,18 +40,6 @@
                     {% endfor %}
                 </ul>
             {% endif %}
-        </div>
-    </div>
-    <div class="card shadow-div" >
-        <div class="card-body">
-            <h5 class="card-title">留 言 板</h5>
-            <h6 class="card-subtitle mb-2 text-muted">留下你想对我说的话</h6>
-            <form id="commentform" action="/comment/" method="post" class="form-group">
-                {% csrf_token %}
-                <input name="target" class="form-control" maxlength="200" type="hidden" value="{{ request.path }}" />
-                {{ comment_form }}
-                <input class="submit-btn" type="submit" class="form-control" value="提交评论" />
-            </form>
         </div>
     </div>
 </div>

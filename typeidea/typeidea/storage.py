@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import os
+
+from django.conf import settings
+from django.utils.six import StringIO
 from django.core.files.storage import FileSystemStorage
 from django.core.files.uploadedfile import InMemoryUploadedFile
-from django.utils.six import StringIO
 from PIL import Image, ImageDraw, ImageFont
 
 
@@ -34,3 +37,11 @@ class MyFileSystemStorage(FileSystemStorage):
         draw.text((x, y), text, color, font=font)
 
         return Image.alpha_composite(image, watermark_image)
+
+
+class OverwriteStorage(FileSystemStorage):
+    def get_available_name(self, name, max_length=None):
+        # If the filename already exists, remove it as if it was a true file system
+        if self.exists(name):
+            os.remove(os.path.join(settings.MEDIA_ROOT, name))
+        return name

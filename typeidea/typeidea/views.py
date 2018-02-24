@@ -39,6 +39,9 @@ class CommonContextMixin(object):
         hot_post = Post.objects.order_by('-pv', '-id')[:8]
         recently_comment = Comment.objects.filter(status=1)[:8]
 
+        # user
+        user = self.request.user
+
         context = {
             'nav_cates': nav_cates,
             'cates': cates,
@@ -47,6 +50,7 @@ class CommonContextMixin(object):
             'recently_comment': recently_comment,
             'hot_post': hot_post,
             'tags': Tag.objects.all(),
+            'user': user,
         }
         context.update(kwargs)
 

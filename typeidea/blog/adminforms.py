@@ -3,12 +3,9 @@
 from dal import autocomplete
 from django import forms
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
-from markdownx.fields import MarkdownxFormField
-from markdownx.widgets import AdminMarkdownxWidget
-from simditor.widgets import SimditorWidget
 
 from .models import Category, Tag
-from .widget import CustomAdminMarkdownxWidget
+from typeidea.widget import CustomAdminMarkdownxWidget
 
 
 class PostAdminForm(forms.ModelForm):

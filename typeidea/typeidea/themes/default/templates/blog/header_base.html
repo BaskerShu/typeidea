@@ -2,13 +2,15 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <title>Hello, world!</title>
+        {% block title %}
+        {% endblock %}
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{% static 'css/fontawesome/fontawesome-all.css' %}">
         <link rel="stylesheet" href="{% static 'css/base.css' %}">
         <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
         {% block style %}
@@ -16,19 +18,42 @@
     </head>
     <body>
         <header class="header-top">
-            <div class="container">
-                <nav class="nav">
-                    <a class="logo" href="{% url 'index' %}">狮子不咬人</a>
-                    <div>
-                        <nav class="nav post-element-nav">
-                            <a class="nav-link {% if isIndex and not query %}active{% endif %}" href="{% url 'index' %}">首页</a>
-                            {% for cate in nav_cates %}
-                                <a class="nav-link {% if cate_id|add:"0" == cate.id %}active{% endif %}" href="{% url 'category' cate.id %}">{{ cate.name }}</a>
-                            {% endfor %}  
-                                <a class="nav-link {% if links %}active{% endif %}" href="{% url 'link' %}">Link</a>
-                        </nav>
-                    </div>
-                </nav>
+            <div class="container navbar navbar-expand">
+                <a class="navbar-brand" href="{% url 'index' %}">
+                    <img src="/media/logo/logo-small.png" alt="logo"/>
+                </a>
+                <ul class="navbar-nav post-element-nav mr-auto ml-3">
+                    <li class="nav-item">
+                        <a class="nav-link {% if isIndex and not query %}active{% endif %}" href="{% url 'index' %}">首页</a>
+                    </li>
+                    {% for cate in nav_cates %}
+                    <li class="nav-item">
+                        <a class="nav-link {% if cate_id|add:"0" == cate.id %}active{% endif %}" href="{% url 'category' cate.id %}">{{ cate.name }}</a>
+                    </li>
+                    {% endfor %}  
+                    <li class="nav-item">
+                        <a class="nav-link {% if links %}active{% endif %}" href="{% url 'link' %}">Link</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav mr-5">
+                    {% if user.username %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link nav-item dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                            <img class="rounded-circle" src="{{ user.profile.avatar.url }}">
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{% url 'profile_home' %}">个人中心</a>
+                            <a class="dropdown-item" href="{% url 'logout' %}">注销</a>
+                        </div>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a href="{% url 'login' %}">
+                            <i class="fas fa-sign-in-alt"></i>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
             </div>
         </header>
         
@@ -53,9 +78,13 @@
             </div>
         </div>
         <footer class="copyright-footer">
-           <div class="container">
-                <span class="text-muted">www.ysz.com</span>    
+           <div class="container text-center">
+                <span class="text-muted">yangshuzhi.me</span>    
+                <br/>
+                <span class="text-muted">基于django+bootstrap+jquery</span>
             </div>
+            <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+            <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
             {% block javascript %}
             {% endblock %}
         </footer>

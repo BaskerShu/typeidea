@@ -1,0 +1,23 @@
+{% extends "./base.html" %}
+{% load static %}
+
+{% block body %}
+    <div class="sign">
+        <div class="logo">
+            <a href="{% url 'index' %}">
+                <img src="/media/logo/logo-small.png" alt="logo"/>
+            </a>
+        </div>
+        <div class="main">
+            <h4 class="title">
+                <div class="normal-title">
+                    <a id="id_login" href="{% url 'login' %}">登录</a>
+                    <b>·</b>
+                    <a id="id_register" href="{% url 'register' %}">注册</a>
+                </div>
+            </h4>
+            {% block main %}
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,4 +1,4 @@
-{% extends "./base.html" %}
+{% extends "./sign_base.html" %}
 {% load widget_tweaks %}
 {% load static %}
 
@@ -8,7 +8,7 @@
 
 {% block main %}
     <form method="post" class="needs-validation" novalidate captcha-refresh-url={% url 'captcha-refresh' %}>
-        {% include './form.html' with form=form %}
+        {% include './sign_form.html' with form=form %}
         <input type="submit" name="commit" value="登录" class="button login-button" data-disable-with="登录">
     </form>
 {% endblock %}

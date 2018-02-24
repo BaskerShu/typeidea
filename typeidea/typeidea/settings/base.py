@@ -29,11 +29,7 @@ INSTALLED_APPS = [
     'account',
 
     # 富文本插件
-    # 'ckeditor',
-    # 'ckeditor_uploader',
-
     'markdownx',
-    # 'simditor',
 
     'rest_framework',
 
@@ -49,9 +45,6 @@ INSTALLED_APPS = [
     'captcha',
 
     'widget_tweaks',
-
-    # 图片处理
-    'imagekit',
 
     'django.forms',
     'django.contrib.admin',
@@ -166,7 +159,7 @@ CKEDITOR_CONFIGS = {
 }
 CKEDITOR_RESTRICT_BY_USER = True
 CKEDITOR_UPLOAD_PATH = 'content/ckeditor/'
-DEFAULT_FILE_STORAGE = 'typeidea.storage.MyFileSystemStorage'
+# DEFAULT_FILE_STORAGE = 'typeidea.storage.MyFileSystemStorage'
 
 # REST分页设置
 REST_FRAMEWORK = {

@@ -2,7 +2,6 @@ $(function() {
     // Click-handler for the refresh-link
     $('.captcha-refresh').click(function(){
         var form = $(this).parents('form');
-        var url = 
 
         $.ajax({
             url: form.attr("captcha-refresh-url"),

@@ -1,10 +1,55 @@
-<h2>profile</h2>
+{% extends "../blog/header_base.html" %}
+{% load static %}
+{% load widget_tweaks %}
 
-<form method="post" class="needs-validation" enctype="multipart/form-data" novalidate captcha-refresh-url={% url 'captcha-refresh' %}>
-    <div>
-        <img src="{{ form.instance.avatar.url }}"/>
+{% block title %}
+    <title>信息修改|{{ profile_form.instance.user.username }}</title>
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="https://cdn.bootcss.com/cropper/3.1.4/cropper.css">
+<link rel="stylesheet" href="{% static 'css/account/profile.css' %}">
+{% endblock %}
+
+{% block breadcrumb %}
+    <div class="text-center">
+        <h2 class="breadcrumb-list">个 人 中 心</h2>    
+        <img src="/media/blog/profile.jpg" class="img-fluid" alt="Responsive image">
     </div>
+{% endblock %}
+
+{% block main %}
+<form method="post" id="formUpload" class="needs-validation" enctype="multipart/form-data" novalidate crop-image-url={% url 'crop-image' %} >
     {% csrf_token %}
-    {{ form }}
-    <input type="submit" name="commit" value="保存" class="button login-button">
+
+    {{ profile_form.avatar }}
+    {% include './profile_form.html' with form=profile_form %}
+    {% include './profile_form.html' with form=user_form %}
+    <input type="submit" name="commit" value="保存" class="button save-button mt-5">
 </form>
+
+    <div class="modal fade" id="modalCrop">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">图片剪切</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="" id="image" style="max-width: 100%;">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary js-crop-and-upload">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script src="https://cdn.bootcss.com/cropper/3.1.4/cropper.js"></script>
+    <script src="{% static 'js/account/crop_image.js' %}"></script>
+{% endblock %}
