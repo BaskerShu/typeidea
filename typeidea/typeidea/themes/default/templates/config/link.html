@@ -1,4 +1,10 @@
 {% extends "../blog/header_base.html" %}
+{% load static %}
+{% load comment_tag %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/comment/base.css' %}">
+{% endblock %}
 
 {% block breadcrumb %}
     <div class="text-center">
@@ -32,7 +38,7 @@
             <p>新人博客，欢迎大家交换友链</p>
         </div>
 
-        {% include "../comment/block.html" %}
+        {% comment_block %}
 
     </div>
 {% endblock %}

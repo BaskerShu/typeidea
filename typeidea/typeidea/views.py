@@ -10,12 +10,15 @@ from comment.forms import CommentForm
 class CommentShowMixin(object):
     def get_comment(self):
         target = self.request.path
-        comment_list = Comment.objects.filter(target=target)
+        comment_list = Comment.objects.filter(target=target).order_by('-created_time')
         return comment_list
 
     def get_context_data(self, **kwargs):
+        if 'comment_form' not in kwargs:
+            kwargs.update({
+                'comment_form': CommentForm(),
+            })
         kwargs.update({
-            'comment_form': CommentForm(),
             'comment_list': self.get_comment(),
         })
         return super(CommentShowMixin, self).get_context_data(**kwargs)

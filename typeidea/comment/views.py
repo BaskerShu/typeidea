@@ -8,25 +8,27 @@ from .forms import CommentForm
 
 
 class CommentView(TemplateView):
-    template_name = 'comment/result.html'
+    template_name = "comment/result.html"
     http_method_names = ['post', ]
 
-    def post(self, request, *args, **kwargs):
-        comment_form = CommentForm(request.POST)
-        target = request.POST.get('target')
-        if comment_form.is_valid():
-            success = True
-            comment = comment_form.save(commit=False)
-            comment.target = target
-            comment.save()
+    def form_valid(self, form, target):
+        comment = form.save(commit=False)
+        comment.target = target
+        comment.owner = self.request.user
+        comment.save()
+        return redirect(target + "#comment")
 
-            return redirect(target)
-        else:
-            success = False
-
+    def form_invalid(self, form, target):
         context = {
-            'success': success,
-            'comment_form': comment_form,
+            'form': form,
             'target': target,
         }
         return self.render_to_response(context)
+
+    def post(self, request, *args, **kwargs):
+        comment_form = CommentForm(request.POST)
+        target = self.request.POST.get('target')
+        if comment_form.is_valid():
+            return self.form_valid(comment_form, target)
+        else:
+            return self.form_invalid(comment_form, target)
