@@ -1,0 +1,93 @@
+/* Write Comment */
+.shadow-div {
+    box-shadow: 0px 10px 40px 0px rgba(47,47,47,0.1);
+    border: 0px solid transparent;
+}
+.card form {
+    position: relative;
+}
+.card form .avatar {
+    position: absolute
+}
+.card form img {
+    width: 36px;
+}
+.card form .content {
+    margin-left: 50px;
+}
+.card textarea {
+    resize: none;
+}
+.card textarea:focus {
+    box-shadow: none;
+    border-color: #ea6f5a;
+}
+.card .submit-btn {
+    border-width: 2px;
+    border-style: solid;
+    border-color: #ea6f5a;
+    padding: 11px 33px;
+    border-radius: 80px;
+    font-size: 14px;
+    font-weight: 400;
+    margin: 10px 0px 0px 0px;
+    cursor: pointer;
+    box-shadow: None;
+    background-color: #ea6f5a;
+    color: #fff;
+}
+.card .submit-btn:hover {
+    background-color: #fff;
+    color: #ea6f5a;
+    border-color: #ea6f5a;
+}
+.card .submit-btn:focus {
+    background-color: #fff;
+    color: #ea6f5a;
+    border-color: #ea6f5a;
+    box-shadow: None;
+}
+/* END */
+
+/* Show Comment */
+.comment-show {
+    margin: 30px 10px 10px 10px;
+}
+.comment-header {
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-bottom: 5px;
+    display: block;
+    border-bottom: 1px solid #eee
+}
+.comment-list li {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 2px solid #eee;
+    padding: 20px 20px;
+}
+.comment-list img {
+    width: 36px;
+}
+.comment-list .name {
+    margin: 0px;
+    line-height: 1;
+    font-size: 18px;
+    color: #333;
+}
+.comment-list .time {
+    margin: 0px;
+    line-height: 1;
+    font-size: 12px;
+    color: #969696;
+}
+.comment-list .content {
+    margin: 15px 0px 0px 10px;
+    line-height: 1.8;
+    color: #333;
+}
+.comment-list ul li {
+    width: 100%;
+}
+/* END */

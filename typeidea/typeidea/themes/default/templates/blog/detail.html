@@ -1,9 +1,11 @@
 {% extends "./base.html" %}
 {% load static %}
+{% load comment_tag %}
 
 {% block style %}
     <link rel="stylesheet" href="{% static 'css/markdown-skin/desert.css' %}">
     <link rel="stylesheet" href="{% static 'css/markdown-style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/comment/base.css' %}">
 {% endblock %}
 
 {% block breadcrumb %}
@@ -49,9 +51,12 @@
         {% autoescape off %}
             {{ post.html }}
         {% endautoescape %}
+        <div class="text-center my-4">
+            <p>---- -- - EOF - -- ----</p>
+        </div>
     </div>
 
-    {% include '../comment/block.html %}
+    {% comment_block %}
 
 {% endblock %}
 

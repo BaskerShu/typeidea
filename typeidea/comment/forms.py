@@ -10,28 +10,8 @@ class CommentForm(forms.ModelForm):
     content = forms.CharField(
         max_length=500,
         label="内容",
-        widget=forms.widgets.Textarea(
-            attrs={'rows': 6, 'cols': 60, 'class': 'form-control'}
-        )
-    )
-    nickname = forms.CharField(
-        max_length=50,
-        label="昵称",
-        widget=forms.widgets.Input(
-            attrs={'class': 'form-control', }
-        )
-    )
-    email = forms.CharField(
-        label="邮箱",
-        widget=forms.widgets.EmailInput(
-            attrs={'class': 'form-control', }
-        )
-    )
-    website = forms.URLField(
-        label="网址",
-        widget=forms.widgets.URLInput(
-            attrs={'class': 'form-control', }
-        )
+        widget=forms.widgets.Textarea(),
+        help_text="填入你想说的话...",
     )
 
     def clean_content(self):
@@ -43,4 +23,4 @@ class CommentForm(forms.ModelForm):
 
     class Meta:
         model = Comment
-        fields = ['nickname', 'email', 'website', 'content', ]
+        fields = ['content', ]

@@ -18,6 +18,7 @@ class CommentView(TemplateView):
             success = True
             comment = comment_form.save(commit=False)
             comment.target = target
+            comment.owner = request.user
             comment.save()
 
             return redirect(target)
