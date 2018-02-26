@@ -1,0 +1,9 @@
+DEBUG=False
+SECRET_KEY=15kov
+DB_NAME=u_dbname
+DB_USER=u_root
+DB_PASSWORD=dbpassword
+DB_HOST=host
+DB_PORT=2222
+REDIS_PASSWORD=redispassowrd
+LOG_FILE=/path/to/tmp/message.log

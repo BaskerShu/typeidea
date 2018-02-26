@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 
-from fabric.api import env, run, roles, cd, sudo, local
+from fabric.api import env, run, roles, cd, sudo, local, put
 from fabric.contrib.files import exists
 from fabric.context_managers import prefix
 
@@ -14,6 +14,9 @@ env.roledefs = {
     'developserver': [
         'baskershu@65.49.132.45:26266',
     ],
+    'stagingserver': [
+        'baskershu@111.231.238.12',
+    ]
 }
 
 
@@ -63,6 +66,7 @@ def deploy(package, version, config):
     with prefix('source {}'.format(active_file_path)):
         pip(package, version)
         make_log_dir()
+        upload_django_env(virtualenv_path)
         collectstatic(virtualenv_name, virtualenv_path)
         supervisor.execute(config, virtualenv_path)
 
@@ -83,6 +87,10 @@ def make_log_dir():
     if exists(log_dir):
         run("rm -rf " + log_dir)
     run("mkdir " + log_dir)
+
+
+def upload_django_env(virtualenv_path):
+    put('config/product_env', '{}/.env'.format(virtualenv_path))
 
 
 def collectstatic(virtualenv_name, virtualenv_path):

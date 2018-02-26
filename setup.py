@@ -4,7 +4,7 @@ packages = find_packages('typeidea')
 print(packages)
 setup(
     name='typeidea',
-    version='1.0.3',
+    version='1.0.4',
     url='https://www.ysz.com/',
     author='Lion',
     author_email='yangshuzhi@outlook.com',
@@ -17,6 +17,7 @@ setup(
     install_requires=[
         'django==1.11.8',
         'xadmin==0.6.1',
+        'python-decouple==3.1',
         'django-autocomplete-light==3.2.10',
         'django-ckeditor==5.4.0',
         'django-debug-toolbar==1.9.1',

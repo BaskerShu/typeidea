@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 
+from decouple import config
 # import raven
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -11,10 +12,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ''
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -55,11 +55,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
-# RAVEN_CONFIG = {
-#     'dsn': 'http://ab2371461063409db01789daa8d8cc31:355a2e40d2004263be50071c66d2862e@192.168.65.128:9000/1',
-#     'release': '1.0.1',
-# }
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -73,18 +68,6 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'typeidea.urls'
 
 WSGI_APPLICATION = 'typeidea.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
@@ -148,18 +131,6 @@ TEMPLATES = [
         },
     },
 ]
-
-CKEDITOR_CONFIGS = {
-    'default': {
-        'toolbar': 'full',
-        'height': 300,
-        'width': '100%',
-        'tabSpaces': 4,
-    },
-}
-CKEDITOR_RESTRICT_BY_USER = True
-CKEDITOR_UPLOAD_PATH = 'content/ckeditor/'
-# DEFAULT_FILE_STORAGE = 'typeidea.storage.MyFileSystemStorage'
 
 # REST分页设置
 REST_FRAMEWORK = {

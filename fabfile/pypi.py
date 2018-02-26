@@ -3,7 +3,7 @@ from fabric.api import run
 
 
 def pip(package_name, version=None):
-    command = 'pip install -i http://65.49.132.45:8080/simple --trusted-host 65.49.132.45 '
+    command = 'pip install -i http://111.231.238.12:8080/simple --trusted-host 111.231.238.12 '
     if version:
         command += '{package}=={version}'.format(package=package_name, version=version)
     else:
