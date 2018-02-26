@@ -42,6 +42,10 @@ $(function() {
             success: function (data) {
                 $(".rounded-circle").attr('src', data.image_url + "?t=" + data.random);
                 $("#modalCrop").modal('hide');
+            },
+            error: function()   {
+                alert('图片上传出现一些问题，请选择其他图片上传,可能的问题\n 1. 图片太大\n 2. 文件文太长');
+                $("#modalCrop").modal('hide');
             }
         });
 

@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import logging
+
 from PIL import Image
 from django import forms
 from captcha.fields import CaptchaField
@@ -9,6 +11,8 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 from .models import Profile
 from typeidea.widget import CustomImageFileInput
+
+logger = logging.getLogger(__name__)
 
 
 class LoginForm(AuthenticationForm):
@@ -40,6 +44,7 @@ class ProfileForm(forms.ModelForm):
         widgets = {'user': forms.HiddenInput(), 'avatar': CustomImageFileInput, }
 
     def save(self):
+        logger.debug("picture is come")
         x = self.cleaned_data.get('x')
         y = self.cleaned_data.get('y')
         width = self.cleaned_data.get('width')

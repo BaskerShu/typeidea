@@ -9,7 +9,7 @@
 {% block main %}
     <form method="post" class="needs-validation" novalidate captcha-refresh-url={% url 'captcha-refresh' %}>
         {% include './sign_form.html' with form=form %}
-        <input type="submit" name="commit" value="登录" class="button register-button" data-disable-with="登录">
+        <input type="submit" name="commit" value="注册" class="button register-button" data-disable-with="登录">
     </form>
 {% endblock %}
 

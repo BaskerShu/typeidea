@@ -51,15 +51,15 @@ section h2{
     top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-family: YouYuan;
+    font-family: 'PingFang SC','Microsoft YaHei',SimHei,Arial,SimSun;
     font-weight: 800;
 }
 section nav{
     position: absolute;
-    top: 62%;
+    top: 67%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-family: YouYuan;
+    font-family: 'PingFang SC','Microsoft YaHei',SimHei,Arial,SimSun;
 }
 .post-breadcrumb {
     background-color: transparent;

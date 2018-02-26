@@ -34,9 +34,10 @@ def upload_typeidea():
     local('python setup.py sdist bdist_wheel upload -r pypi')
 
 
-@roles('developserver')
+@roles('stagingserver')
 def deploy_typeidea(version):
     deploy('typeidea', version, 'supervisord_typeidea.conf')
+    sudo('sudo systemctl restart nginx.service')  # 重启nginx
 
 
 @roles('developserver')
@@ -61,6 +62,7 @@ def deploy(package, version, config):
 
     with prefix('source {}'.format(active_file_path)):
         pip(package, version)
+        make_log_dir()
         collectstatic(virtualenv_name, virtualenv_path)
         supervisor.execute(config, virtualenv_path)
 
@@ -74,6 +76,13 @@ def ensure_virtualenv(virtualenv_name, active_file_path):
 def install_package(package_name, active_file_path, version):
     with prefix('source {}'.format(active_file_path)):
         pip('typeidea', version)
+
+
+def make_log_dir():
+    log_dir = "/home/baskershu/myblog/typeidea-env/log"
+    if exists(log_dir):
+        run("rm -rf " + log_dir)
+    run("mkdir " + log_dir)
 
 
 def collectstatic(virtualenv_name, virtualenv_path):

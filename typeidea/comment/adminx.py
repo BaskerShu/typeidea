@@ -11,10 +11,10 @@ from .adminforms import CommentAdminForm
 class CommentAdmin(object):
     form = CommentAdminForm
 
-    list_display = ['target', 'content', 'nickname', 'website', 'email', 'created_time', ]
+    list_display = ['target', 'content', 'created_time', 'owner']
     list_display_links = None
     list_filter = ['content', ]
-    search_fields = ['content', 'nickname']
+    search_fields = ['content', 'owner']
 
     # 编辑界面
     exclude = ('target', )
@@ -22,10 +22,7 @@ class CommentAdmin(object):
     form_layout = (
         Fieldset(
             "信息填写",
-            'nickname',
-            'website',
-            'email',
-            'title',
+            'owner',
             'content',
         ),
         Fieldset(

@@ -38,7 +38,7 @@
     margin: 0px;
     /* border: 1px solid #cccccc; */
     border: 0px solid #cccccc;
-    height: 100%;
+    height: calc(100% - 55px);
 }
 .markdownx .child-left {
     height: 100%;
